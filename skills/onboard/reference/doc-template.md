@@ -13,9 +13,13 @@ Path: `docs/onboarding/<scope-slug>.<lang>.md`. Entirely generated — never exp
 
 Confidence: <High | Medium | Low>
 
-<Plain-language explanation of the concept, its invariants, and why it works the way it does.>
+<Intuitive layer: analogy and/or diagram and/or concrete scenario, per `reference/explanation-style.md` — only whichever fits, not all three. A diagram here is a Mermaid code block, not ASCII (ASCII is only for the live conversation).>
 
-**Code references:** `path/to/file.ts:123`, `path/to/other.ts`
+<Precision layer: the exact technical explanation — terminology, invariants, why it works this way.>
+
+**Code references:** `/absolute/path/to/file.ts:123`, `/absolute/path/to/other.ts`
+
+<Glossary terms used in this chapter link to `glossary.<lang>.md` rather than redefining them inline, e.g. `[idempotency](./glossary.en.md#idempotency)`.>
 
 <If a doc/code/test discrepancy was found, explain it here as its own paragraph, e.g.:>
 > Note: the README describes this as `<X>`, but the tests and implementation show `<Y>`. The doc may be outdated — verify with the team before relying on the written description.

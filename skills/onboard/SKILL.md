@@ -5,7 +5,7 @@ description: Claude-led, interactive guided tour that teaches a developer the do
 
 You are running a guided onboarding tour of a codebase. Unlike `grilling` (which interviews the user), here **you** are the one explaining — the user is the learner. Run this inside the codebase the user is onboarding to.
 
-Read `reference/doc-template.md`, `reference/config-schema.md`, and `reference/corrections-template.md` in this skill's directory before generating any file — they define the exact structure to produce.
+Read `reference/doc-template.md`, `reference/config-schema.md`, `reference/corrections-template.md`, `reference/explanation-style.md`, and `reference/glossary-template.md` in this skill's directory before generating any file — they define the exact structure to produce.
 
 ## 1. Resolve the scope
 
@@ -36,14 +36,16 @@ For each chapter, immediately before presenting it (not all chapters up front):
 
 ## 4. Teach the chapter
 
-For each chapter:
-1. Explain the domain concept in plain language, citing concrete file/function references.
-2. If you found a doc/code/test discrepancy in step 3, explain it here as part of the content.
-3. State the confidence label for this chapter.
-4. Ask exactly one open-ended (not multiple-choice) comprehension question that probes the concept's core invariant or an edge case — something that can't be answered by pattern-matching keywords. Tell the user they can say "skip" to move on without answering.
-5. If they answer, grade it yourself into one of: `understood`, `uncertain`, `misunderstood`. Give brief feedback — correct misunderstandings before moving on, don't just acknowledge and proceed.
-6. Record this chapter's outcome in the user's personal progress file (step 6) before moving to the next chapter, so an interruption never loses completed work.
-7. Move to the next chapter. Do not show an upfront table of contents within the scope — the tour order is yours to drive.
+For each chapter, follow `reference/explanation-style.md` for *how* to explain — it governs when to use analogies/diagrams/scenarios, the two-layer (intuitive → precise) structure, and what to do if the user says they still don't understand. The steps below govern the overall chapter flow:
+
+1. Explain the domain concept per `reference/explanation-style.md`, citing concrete file/function references as **absolute paths** (with `:line` where a specific line matters) so they render as clickable links in the user's terminal/editor.
+2. Check `docs/onboarding/glossary.<lang>.md` (see `reference/glossary-template.md`) for terms relevant to this chapter. Reuse an already-established analogy/definition instead of inventing a new one for a term that recurs. If this chapter introduces a term worth keeping (recurs across chapters, or is a non-obvious/tricky concept), add or update its glossary entry — per-scope, if its meaning differs by scope (never silently overwrite a different scope's definition of the same term).
+3. If you found a doc/code/test discrepancy in step 3 (of section 3 above), explain it here as part of the content.
+4. State the confidence label for this chapter.
+5. Ask exactly one open-ended (not multiple-choice) comprehension question that probes the concept's core invariant or an edge case — something that can't be answered by pattern-matching keywords. Tell the user they can say "skip" to move on without answering.
+6. If they answer, grade it yourself into one of: `understood`, `uncertain`, `misunderstood`. Give brief feedback — correct misunderstandings before moving on, don't just acknowledge and proceed.
+7. Record this chapter's outcome in the user's personal progress file (step 6) before moving to the next chapter, so an interruption never loses completed work.
+8. Move to the next chapter. Do not show an upfront table of contents within the scope — the tour order is yours to drive.
 
 ## 5. Resuming an interrupted tour
 
@@ -56,6 +58,7 @@ All repo-relative paths below are relative to the target codebase's root (not th
 - **`docs/onboarding/<scope-slug>.<lang>.md`** — the generated mental-model document, per `reference/doc-template.md`. Always fully GENERATED — never expect or preserve manual edits inside it; it's safe to regenerate/overwrite per chapter on every run.
 - **`docs/onboarding/<scope-slug>.corrections.md`** — human-maintained sidecar, per `reference/corrections-template.md`. Read it back in during step 3 of every chapter and incorporate any correction it contains. If a scope accumulates several corrections, say so explicitly to the user — it's a signal that this area may be tribal-knowledge-dependent / a bus-factor risk worth flagging to the team, not just a documentation gap.
 - **`docs/onboarding/<scope-slug>.meta.json`** — structured per-chapter metadata: confidence label, last-investigated commit SHA, last-updated timestamp per chapter. This is what step 7's diff logic and any future doc-health aggregation reads.
+- **`docs/onboarding/glossary.<lang>.md`** — one shared glossary per language, per `reference/glossary-template.md`, covering **all** scopes (not per-scope) so a term learned in one scope is recognized and reused in another. Read and update it during step 4 of every chapter.
 - **`.onboard/config.json`** — repo-level, git-committed config, per `reference/config-schema.md`. Holds `docLanguages` (array). If it doesn't exist when you need it, create it defaulting to `[<language of this conversation>]`.
 - **Personal progress** (per-user, per-scope, per-chapter completion + quiz grade) — never goes in the target repo. Store it at `~/.claude/onboard/<repo-identifier>/<user-id>.json` on the local machine, where `<repo-identifier>` is derived from the repo's remote URL or absolute path, and `<user-id>` from `git config user.email` (fall back to OS username). This file is local-only by construction, so it can't accidentally get committed.
 
