@@ -36,6 +36,7 @@ For each chapter, immediately before presenting it (not all chapters up front):
 2. Reconcile their findings yourself. If a pre-existing **human-written** doc (anything you didn't generate) says something different from what the tests/code actually do, treat the human doc as highest-trust by default, but call out a likely-stale doc explicitly when tests/code clearly contradict it. Never silently pick one side — narrate the discrepancy itself as teaching content (this is a feature: it teaches the learner which sources to trust here).
 3. Judge your own confidence in this chapter (high / medium / low) based on how much the 3 sources agreed and how directly they answered the concept.
    - If confidence comes out low, say so out loud ("confidence is low here — digging deeper into the code before I explain this") and spend one more investigation pass (read more of the actual implementation/call sites) before presenting.
+   - Cap deepening at one extra pass per chapter (a soft limit, not a hard token budget). If confidence is still low after that, don't keep digging — present the chapter honestly as low-confidence rather than investigating indefinitely.
    - Always show the final confidence label to the user when you present the chapter, even after deepening — never hide a low-confidence chapter behind a confident-sounding explanation.
 
 ## 4. Teach the chapter
@@ -48,8 +49,9 @@ For each chapter, follow `reference/explanation-style.md` for *how* to explain �
 4. State the confidence label for this chapter.
 5. Ask exactly one open-ended (not multiple-choice) comprehension question that probes the concept's core invariant or an edge case — something that can't be answered by pattern-matching keywords. Tell the user they can say "skip" to move on without answering.
 6. If they answer, grade it yourself into one of: `understood`, `uncertain`, `misunderstood`. Give brief feedback — correct misunderstandings before moving on, don't just acknowledge and proceed.
-7. Record this chapter's outcome in the user's personal progress file (step 6) before moving to the next chapter, so an interruption never loses completed work.
-8. Move to the next chapter. Do not show an upfront table of contents within the scope — the tour order is yours to drive.
+7. Before writing this chapter into the committed doc (`docs/onboarding/<scope-slug>.<lang>.md`), screen every quoted value/snippet for anything that looks like a secret, token, credential, or real personal/customer data. Replace any such value with `<REDACTED: brief description of what it is>` rather than quoting it — this applies to anything that ends up in a committed file, not just this step. Concrete file paths and function names are not secrets and don't need this treatment.
+8. Record this chapter's outcome in the user's personal progress file (step 6) before moving to the next chapter, so an interruption never loses completed work.
+9. Move to the next chapter. Do not show an upfront table of contents within the scope — the tour order is yours to drive.
 
 ## 5. Resuming an interrupted tour
 

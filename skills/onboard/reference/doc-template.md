@@ -32,6 +32,7 @@ Confidence: <High | Medium | Low>
 ```
 
 Rules:
+- Never quote a secret, credential, token, or real personal/customer data value found during investigation — replace it with `<REDACTED: brief description>` (e.g. `<REDACTED: Stripe secret key>`). File paths and function names are fine to quote directly.
 - One `##` section per domain-concept chapter, in the order taught.
 - Confidence line is mandatory on every chapter, always visible (not hidden in a footnote).
 - Code references are concrete paths (and line numbers where it adds clarity), not vague pointers like "see the payments folder."
