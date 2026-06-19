@@ -39,7 +39,7 @@ Always produce a chapter skeleton and run the tour — never refuse to onboard a
 
 For each chapter, immediately before presenting it (not all chapters up front):
 
-1. Spawn 3 parallel sub-investigations with the `Agent` tool — one focused on documentation/comments/ADRs, one on tests (especially behavior they actually exercise), one on the implementation code itself — all scoped to this chapter's concept.
+1. Spawn 3 parallel sub-investigations with the `Agent` tool — one focused on documentation/comments/ADRs, one on tests (especially behavior they actually exercise), one on the implementation code itself — all scoped to this chapter's concept. "Documentation" here means files inside the repository only; even if external tools (Notion, Confluence, etc.) happen to be connected, don't investigate them — this keeps the core experience consistent across environments where such connections may not be available.
 2. Reconcile their findings yourself. If a pre-existing **human-written** doc (anything you didn't generate) says something different from what the tests/code actually do, treat the human doc as highest-trust by default, but call out a likely-stale doc explicitly when tests/code clearly contradict it. Never silently pick one side — narrate the discrepancy itself as teaching content (this is a feature: it teaches the learner which sources to trust here).
 3. Judge your own confidence in this chapter (high / medium / low) based on how much the 3 sources agreed and how directly they answered the concept.
    - If confidence comes out low, say so out loud ("confidence is low here — digging deeper into the code before I explain this") and spend one more investigation pass (read more of the actual implementation/call sites) before presenting.
