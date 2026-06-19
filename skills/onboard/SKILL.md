@@ -101,6 +101,8 @@ All repo-relative paths below are relative to the target codebase's root (not th
    - Chapter not yet completed by this user → teach normally (step 4), regardless of whether it changed.
 5. Update `<scope-slug>.meta.json` with the new commit SHA for every chapter you re-investigated.
 
+Investigation always reads the current working tree as-is (including uncommitted local changes), same as a normal file read — don't special-case a dirty tree. The recorded SHA is necessarily the last *committed* state, though, so an uncommitted change you just investigated won't be detectable as "already accounted for" by a future diff until it's actually committed. This is an accepted limitation, not something to work around.
+
 A future per-chapter depth-tier system (basics → edge cases/invariants/history → performance/scaling, so repeat visits to unchanged chapters can go deeper instead of just skipping) is intentionally **out of scope for now**. Keep the meta/progress file shapes simple but don't add anything that would make adding tiers later a breaking change (e.g. don't hardcode "one completion record per chapter" in a way that can't hold a tier number).
 
 ## 8. Language
