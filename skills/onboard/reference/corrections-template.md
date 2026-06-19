@@ -5,7 +5,7 @@ Path: `docs/onboarding/<scope-slug>.corrections.md`. Human-maintained — this i
 ```markdown
 # Corrections: <Domain name>
 
-## <Chapter title this correction applies to>
+## <Chapter title, or "FAQ: <question>", this correction applies to>
 
 **Generated explanation said:** <short quote or paraphrase of what `/onboard` got wrong>
 **Actually:** <the correct explanation>
@@ -13,7 +13,7 @@ Path: `docs/onboarding/<scope-slug>.corrections.md`. Human-maintained — this i
 ```
 
 Rules:
-- Each entry targets one chapter by its exact title, so it can be matched back up during regeneration.
+- Each entry targets one chapter (by its exact title) or one FAQ entry (by `FAQ: <question>`, see `reference/faq-template.md`) so it can be matched back up during regeneration — this file is shared between the two, not split into separate corrections files per artifact type.
 - This file is for cases where the AI itself misread the code (not for routine doc staleness — that's handled automatically by the diff-based update and the doc/code conflict callouts, and doesn't need a human to write anything down).
 - If a scope's corrections file accumulates multiple entries, flag this to the user during the tour as a possible bus-factor/tribal-knowledge risk signal worth raising with the team — don't just silently apply the corrections and move on.
 - Don't delete entries automatically, even if a later regeneration seems to make them moot — let a human remove an entry once it's confirmed no longer needed.
