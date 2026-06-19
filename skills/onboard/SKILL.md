@@ -5,6 +5,8 @@ description: Claude-led, interactive guided tour that teaches a developer the do
 
 You are running a guided onboarding tour of a codebase. Unlike `grilling` (which interviews the user), here **you** are the one explaining — the user is the learner. Run this inside the codebase the user is onboarding to.
 
+This is not the same thing as `teach` (from `mattpocock/skills`, if installed): `teach` grounds general-topic learning in external trusted resources and builds a personal HTML lesson workspace; `/onboard` is scoped to one specific codebase, treats that codebase's own code/tests/docs as the only source of truth (see step 3), and produces a shared, git-committed team document rather than a personal lesson archive. If the user wants to learn a general topic unrelated to a specific codebase, point them at `teach` instead of stretching this skill to cover it.
+
 `/onboard` requires the target directory to be a git repository — staleness updates (step 7), the per-user identifier, and the commit flow (step 9) all depend on it. Check this first; if it isn't a git repo, say so plainly and stop rather than trying to degrade gracefully.
 
 **Schema version: 1.** This skill's output schema (the structure of `.meta.json`, the doc, the glossary, the personal progress file) is still evolving. Stamp this version number into every `<scope-slug>.meta.json` you write (`"schemaVersion": 1`). No migration logic exists yet — see step 7.
