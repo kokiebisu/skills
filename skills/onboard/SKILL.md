@@ -18,6 +18,8 @@ If invoked with no argument:
 
 Before investigating, check whether `docs/onboarding/<scope-slug>.*.md` already exists for the resolved scope (where `<scope-slug>` is a kebab-case slug of the scope's domain name). If it exists, this is not a fresh tour — go to step 7 (staleness/diff update) instead of step 2. This also covers the case where another teammate already ran `/onboard` on this same scope.
 
+Once the scope is resolved (whether by menu or argument), and only for a fresh tour (not the diff-update path), ask **one** calibration question about the learner's familiarity with concepts likely to come up in this scope (e.g. "are you already comfortable with event-driven architectures / eventual consistency?"). Use the answer to set how much hand-holding (analogies/diagrams/scenarios per `reference/explanation-style.md`) this tour defaults to. This is a single one-time calibration — do not re-ask per chapter or continuously adjust based on quiz performance.
+
 ## 2. Build the chapter skeleton
 
 Chapters are organized around **domain concepts** (entities, use cases, invariants, state transitions) — never around file/folder structure. A chapter may cite code spread across many files; that's expected.

@@ -6,6 +6,18 @@ How to explain each chapter's domain concept, not just what to cover.
 
 Not every chapter needs the full treatment. A simple fact ("there are 3 order statuses") just needs to be stated plainly. Reserve the techniques below for concepts that are abstract, counter-intuitive, or where new hires typically get confused. Forcing analogies/diagrams/scenarios onto trivial chapters makes the tour slower and reads as padding.
 
+## One-time calibration, not continuous adaptation
+
+At the start of a fresh tour (see SKILL.md step 1), the learner answers one question about their familiarity with concepts likely to recur in this scope. Use that answer to set how much hand-holding this tour defaults to for the whole scope (e.g. an experienced hire who says they already know event-driven systems gets lighter treatment of those concepts than someone who says they don't). This is a single initial setting, not something re-evaluated per chapter or adjusted based on how a quiz answer goes — don't build adaptive/real-time logic here.
+
+## Don't pad — techniques compress, they don't add length
+
+Aim for each chapter to be readable in about as much time as it'd take to explain out loud in a couple of minutes. Using an analogy/diagram/scenario should make the same information easier to grasp, not add extra length on top of a full explanation — keep the analogy itself to a sentence or two, the scenario to its essential steps, the diagram to the minimum boxes/arrows needed. If you notice a chapter running long, cut elaboration before cutting the precision layer.
+
+## Don't force one theme across the whole tour
+
+Pick whichever analogy fits each concept best, chosen independently per chapter — don't try to reuse one extended metaphor (e.g. "everything is a kitchen") across the whole tour. Concepts vary enough that forcing one theme onto all of them produces more awkward, strained analogies than freely choosing per concept. (Cross-chapter consistency for *recurring terms* is handled separately by the shared glossary — see `reference/glossary-template.md` — not by a unifying analogy theme.)
+
 ## Three techniques, chosen per concept — not a fixed 3-piece template
 
 For a concept that needs more than a plain statement, pick whichever of these actually fits it — use one, two, or all three, but don't mechanically apply all three to every chapter:
