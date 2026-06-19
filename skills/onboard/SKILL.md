@@ -7,6 +7,8 @@ You are running a guided onboarding tour of a codebase. Unlike `grilling` (which
 
 `/onboard` requires the target directory to be a git repository — staleness updates (step 7), the per-user identifier, and the commit flow (step 9) all depend on it. Check this first; if it isn't a git repo, say so plainly and stop rather than trying to degrade gracefully.
 
+**Schema version: 1.** This skill's output schema (the structure of `.meta.json`, the doc, the glossary, the personal progress file) is still evolving. Stamp this version number into every `<scope-slug>.meta.json` you write (`"schemaVersion": 1`). No migration logic exists yet — see step 7.
+
 Read `reference/doc-template.md`, `reference/config-schema.md`, `reference/corrections-template.md`, `reference/explanation-style.md`, and `reference/glossary-template.md` in this skill's directory before generating any file — they define the exact structure to produce.
 
 ## 1. Resolve the scope
@@ -67,13 +69,14 @@ All repo-relative paths below are relative to the target codebase's root (not th
 
 - **`docs/onboarding/<scope-slug>.<lang>.md`** — the generated mental-model document, per `reference/doc-template.md`. Always fully GENERATED — never expect or preserve manual edits inside it; it's safe to regenerate/overwrite per chapter on every run.
 - **`docs/onboarding/<scope-slug>.corrections.md`** — human-maintained sidecar, per `reference/corrections-template.md`. Read it back in during step 3 of every chapter and incorporate any correction it contains. If a scope accumulates several corrections, say so explicitly to the user — it's a signal that this area may be tribal-knowledge-dependent / a bus-factor risk worth flagging to the team, not just a documentation gap.
-- **`docs/onboarding/<scope-slug>.meta.json`** — structured per-chapter metadata: confidence label, last-investigated commit SHA, last-updated timestamp per chapter. This is what step 7's diff logic and any future doc-health aggregation reads.
+- **`docs/onboarding/<scope-slug>.meta.json`** — structured per-chapter metadata: confidence label, last-investigated commit SHA, last-updated timestamp per chapter, plus the top-level `schemaVersion` (see above). This is what step 7's diff logic and any future doc-health aggregation reads.
 - **`docs/onboarding/glossary.<lang>.md`** — one shared glossary per language, per `reference/glossary-template.md`, covering **all** scopes (not per-scope) so a term learned in one scope is recognized and reused in another. Read and update it during step 4 of every chapter.
 - **`.onboard/config.json`** — repo-level, git-committed config, per `reference/config-schema.md`. Holds `docLanguages` (array). If it doesn't exist when you need it, create it defaulting to `[<language of this conversation>]`.
 - **Personal progress** (per-user, per-scope, per-chapter completion + quiz grade, plus the Q12 calibration answer) — never goes in the target repo. Store it at `~/.claude/onboard/<repo-identifier>/<user-id>.json` on the local machine, where `<repo-identifier>` is derived from the repo's remote URL or absolute path, and `<user-id>` from `git config user.email` (fall back to OS username). This file is local-only by construction, so it can't accidentally get committed.
 
 ## 7. Staleness / diff-based update (re-running on an existing scope)
 
+0. Check `<scope-slug>.meta.json`'s `schemaVersion` against this skill's current schema version (above). If it doesn't match, don't attempt a diff-based update — regenerate the scope from scratch (step 2 onward) and write the current `schemaVersion`. There's no migration logic for old schemas; a full regeneration is the only supported path across a schema change.
 1. Read `docs/onboarding/<scope-slug>.meta.json` for the last-investigated commit SHA per chapter.
 2. Run `git diff <that SHA>..HEAD -- <chapter's known files>` (or `git log`) to determine which chapters' underlying files changed since they were last generated.
 3. Only re-run step 3's investigation for changed chapters; leave unchanged chapters' content as-is in the doc.
