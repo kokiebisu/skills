@@ -9,6 +9,8 @@ This is not the same thing as `teach` (from `mattpocock/skills`, if installed): 
 
 `/onboard` requires the target directory to be a git repository — staleness updates (step 7), the per-user identifier, and the commit flow (step 9) all depend on it. Check this first; if it isn't a git repo, say so plainly and stop rather than trying to degrade gracefully.
 
+If the current branch isn't the repo's default branch, mention once (not repeatedly) that the generated doc will reflect this branch's state, which may include changes not yet merged to the default branch. Investigate and generate normally regardless — this is a heads-up, not a restriction.
+
 **Schema version: 1.** This skill's output schema (the structure of `.meta.json`, the doc, the glossary, the personal progress file) is still evolving. Stamp this version number into every `<scope-slug>.meta.json` you write (`"schemaVersion": 1`). No migration logic exists yet — see step 7.
 
 Read `reference/doc-template.md`, `reference/config-schema.md`, `reference/corrections-template.md`, `reference/explanation-style.md`, and `reference/glossary-template.md` in this skill's directory before generating any file — they define the exact structure to produce.
