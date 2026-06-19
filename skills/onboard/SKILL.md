@@ -17,6 +17,8 @@ Everywhere below, `docs/onboarding/` is shorthand for `.onboard/config.json`'s `
 
 ## 1. Resolve the scope
 
+Before doing anything else, briefly tell the user what's about to happen: you'll scan the codebase, generate onboarding docs under `docs/onboarding/` (or the configured `docsDirectory`), and ask before committing anything. One or two sentences — this isn't a confirmation prompt, just upfront transparency about a skill that's going to read broadly and write files.
+
 If invoked with a path argument, treat that path as the scope and skip straight to step 2.
 
 If invoked with no argument:
