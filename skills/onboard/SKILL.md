@@ -26,7 +26,7 @@ Before doing anything else, briefly tell the user what's about to happen: you'll
 If invoked with a path argument, treat that path as the scope and skip straight to step 2.
 
 If invoked with no argument:
-1. Do a shallow scan of the whole repository (directory layout, README files, top-level package/module names — do not deep-read yet).
+1. Do a shallow scan of the whole repository (directory layout, README files, top-level package/module names — do not deep-read yet). If the repo is a monorepo (`workspaces` in `package.json`, `pnpm-workspace.yaml`, etc.), treat its declared workspace boundaries as a strong hint for domain candidates — the maintainers already split things into meaningful units, which is more reliable than inferring boundaries from directory names alone.
 2. From that scan, identify candidate domain areas. Build a menu where each option is labeled `<domain name> (<directories>)` — e.g. `Payments (api/payments, workers/payment-jobs)`. Domains may span multiple directories; directories may map to multiple domains — list both honestly, don't force a clean 1:1 mapping.
 3. Compare this scan against existing files in `docs/onboarding/`. If a `<scope-slug>.*.md` exists whose directories no longer exist in the repo (the domain it documented has disappeared, e.g. merged into another service), don't silently delete it — flag it to the user and ask whether to remove it. Never delete it without that confirmation.
 4. Ask the user to pick one scope via `AskUserQuestion` (single question, the menu as options).
@@ -49,6 +49,7 @@ Always produce a chapter skeleton and run the tour — never refuse to onboard a
 
 For each chapter, immediately before presenting it (not all chapters up front):
 
+0. Exclude `.gitignore`d paths and obvious vendored/generated content (`node_modules`, build output, lockfiles, vendored third-party code) from all investigation below — these aren't the domain model, just noise that wastes the investigation budget from step 3's confidence-deepening cap.
 1. Spawn 3 parallel sub-investigations with the `Agent` tool — one focused on documentation/comments/ADRs, one on tests (especially behavior they actually exercise), one on the implementation code itself — all scoped to this chapter's concept. "Documentation" here means files inside the repository only; even if external tools (Notion, Confluence, etc.) happen to be connected, don't investigate them yet — this keeps the core experience consistent across environments where such connections may not be available. Out of scope for now, not rejected: a future version should fold in connected external docs and extend the conflict-surfacing in step 2 below to "external doc says X, code says Y" the same way it already handles in-repo conflicts.
 2. Reconcile their findings yourself. If a pre-existing **human-written** doc (anything you didn't generate) says something different from what the tests/code actually do, treat the human doc as highest-trust by default, but call out a likely-stale doc explicitly when tests/code clearly contradict it. Never silently pick one side — narrate the discrepancy itself as teaching content (this is a feature: it teaches the learner which sources to trust here).
 3. Judge your own confidence in this chapter (high / medium / low) based on how much the 3 sources agreed and how directly they answered the concept.
