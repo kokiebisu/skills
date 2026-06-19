@@ -59,6 +59,8 @@ For each chapter, follow `reference/explanation-style.md` for *how* to explain �
 8. Record this chapter's outcome in the user's personal progress file (step 6) before moving to the next chapter, so an interruption never loses completed work.
 9. Move to the next chapter. Do not show an upfront table of contents within the scope — the tour order is yours to drive.
 
+When there is no next chapter, the scope is complete: tell the user so, then look back at the scope-selection menu from step 1 and suggest one of the other domains they haven't toured yet as a natural next step (skip this if they entered directly via a path argument and never saw a menu, or if there are no other domains left).
+
 ## 5. Resuming an interrupted tour
 
 Before starting a fresh chapter-by-chapter walk, check this user's personal progress file (step 6 path) for this scope. If it shows an incomplete chapter from a prior run, don't silently restart — show which chapter was incomplete and ask the user to choose: replay the explanation, jump straight to that chapter's quiz, or skip to the next chapter. Never try to resume mid-explanation/mid-sentence.
