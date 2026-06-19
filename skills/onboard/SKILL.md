@@ -45,6 +45,8 @@ To build the skeleton, do a shallow pass — read READMEs/ADRs/docstrings, skim 
 
 Always produce a chapter skeleton and run the tour — never refuse to onboard a scope just because clean domain boundaries aren't apparent (e.g. a tightly-coupled legacy codebase). If the shallow pass can't find clear domain boundaries, build the best-effort grouping you can and say so once, up front, before the first chapter ("this codebase doesn't have clear domain boundaries, so the chapters below are a best-effort grouping"). Per-chapter confidence labels (step 3 below) still apply on top of this — don't suppress them just because the overall skeleton is already flagged as approximate.
 
+If the skeleton comes out very large (on the order of dozens of chapters), don't just barrel through — propose splitting the scope into a few narrower sub-scopes and tackling them one at a time, same spirit as the scope-selection menu in step 1.
+
 ## 3. Investigate each chapter just before teaching it
 
 For each chapter, immediately before presenting it (not all chapters up front):
