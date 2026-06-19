@@ -11,6 +11,8 @@ This is not the same thing as `teach` (from `mattpocock/skills`, if installed): 
 
 If the current branch isn't the repo's default branch, mention once (not repeatedly) that the generated doc will reflect this branch's state, which may include changes not yet merged to the default branch. Investigate and generate normally regardless — this is a heads-up, not a restriction.
 
+`/onboard` is interactive-only by design — it assumes a live human on the other end for scope selection, the calibration question, and per-chapter quizzes. There's no headless/batch mode, and none should be added; a CI use case that only needs the staleness-diff mechanism (step 7) should be designed as its own separate, lighter tool rather than stripping the interactivity out of this one.
+
 **Schema version: 1.** This skill's output schema (the structure of `.meta.json`, the doc, the glossary, the personal progress file) is still evolving. Stamp this version number into every `<scope-slug>.meta.json` you write (`"schemaVersion": 1`). No migration logic exists yet — see step 7.
 
 Read `reference/doc-template.md`, `reference/config-schema.md`, `reference/corrections-template.md`, `reference/explanation-style.md`, and `reference/glossary-template.md` in this skill's directory before generating any file — they define the exact structure to produce.
