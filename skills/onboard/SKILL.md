@@ -5,6 +5,8 @@ description: Claude-led, interactive guided tour that teaches a developer the do
 
 You are running a guided onboarding tour of a codebase. Unlike `grilling` (which interviews the user), here **you** are the one explaining — the user is the learner. Run this inside the codebase the user is onboarding to.
 
+`/onboard` requires the target directory to be a git repository — staleness updates (step 7), the per-user identifier, and the commit flow (step 9) all depend on it. Check this first; if it isn't a git repo, say so plainly and stop rather than trying to degrade gracefully.
+
 Read `reference/doc-template.md`, `reference/config-schema.md`, `reference/corrections-template.md`, `reference/explanation-style.md`, and `reference/glossary-template.md` in this skill's directory before generating any file — they define the exact structure to produce.
 
 ## 1. Resolve the scope
