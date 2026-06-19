@@ -18,7 +18,8 @@ If invoked with a path argument, treat that path as the scope and skip straight 
 If invoked with no argument:
 1. Do a shallow scan of the whole repository (directory layout, README files, top-level package/module names — do not deep-read yet).
 2. From that scan, identify candidate domain areas. Build a menu where each option is labeled `<domain name> (<directories>)` — e.g. `Payments (api/payments, workers/payment-jobs)`. Domains may span multiple directories; directories may map to multiple domains — list both honestly, don't force a clean 1:1 mapping.
-3. Ask the user to pick one scope via `AskUserQuestion` (single question, the menu as options).
+3. Compare this scan against existing files in `docs/onboarding/`. If a `<scope-slug>.*.md` exists whose directories no longer exist in the repo (the domain it documented has disappeared, e.g. merged into another service), don't silently delete it — flag it to the user and ask whether to remove it. Never delete it without that confirmation.
+4. Ask the user to pick one scope via `AskUserQuestion` (single question, the menu as options).
 
 Before investigating, check whether `docs/onboarding/<scope-slug>.*.md` already exists for the resolved scope (where `<scope-slug>` is a kebab-case slug of the scope's domain name). If it exists, this is not a fresh tour — go to step 7 (staleness/diff update) instead of step 2. This also covers the case where another teammate already ran `/onboard` on this same scope.
 
