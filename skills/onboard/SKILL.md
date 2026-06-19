@@ -13,6 +13,8 @@ This is not the same thing as `teach` (from `mattpocock/skills`, if installed): 
 
 Read `reference/doc-template.md`, `reference/config-schema.md`, `reference/corrections-template.md`, `reference/explanation-style.md`, and `reference/glossary-template.md` in this skill's directory before generating any file — they define the exact structure to produce.
 
+Everywhere below, `docs/onboarding/` is shorthand for `.onboard/config.json`'s `docsDirectory` (default `docs/onboarding` — see `reference/config-schema.md`). If a team has customized it (via `/setup-onboard` or by hand), use their configured path instead of the literal string.
+
 ## 1. Resolve the scope
 
 If invoked with a path argument, treat that path as the scope and skip straight to step 2.
@@ -78,7 +80,7 @@ All repo-relative paths below are relative to the target codebase's root (not th
 - **`docs/onboarding/<scope-slug>.corrections.md`** — human-maintained sidecar, per `reference/corrections-template.md`. Read it back in during step 3 of every chapter and incorporate any correction it contains. If a scope accumulates several corrections, say so explicitly to the user — it's a signal that this area may be tribal-knowledge-dependent / a bus-factor risk worth flagging to the team, not just a documentation gap. If a chapter has multiple corrections that contradict each other, don't pick one yourself (and don't re-investigate the code to break the tie) — present the contradiction itself to the learner, same as any other source conflict (step 3.2).
 - **`docs/onboarding/<scope-slug>.meta.json`** — structured per-chapter metadata: confidence label, last-investigated commit SHA, last-updated timestamp per chapter, plus the top-level `schemaVersion` (see above) and `completionCount` (anonymous integer, incremented on every scope completion — no user identifier). This is what step 7's diff logic and any future doc-health aggregation reads.
 - **`docs/onboarding/glossary.<lang>.md`** — one shared glossary per language, per `reference/glossary-template.md`, covering **all** scopes (not per-scope) so a term learned in one scope is recognized and reused in another. Read and update it during step 4 of every chapter.
-- **`.onboard/config.json`** — repo-level, git-committed config, per `reference/config-schema.md`. Holds `docLanguages` (array). If it doesn't exist when you need it, create it defaulting to `[<language of this conversation>]`.
+- **`.onboard/config.json`** — repo-level, git-committed config, per `reference/config-schema.md`. Holds `docLanguages`, `docsDirectory`, and `commitByDefault`. If it doesn't exist when you need it, create it with the defaults described in `reference/config-schema.md`. A team can set these explicitly (instead of relying on defaults) by running `/setup-onboard` once.
 - **Personal progress** (per-user, per-scope, per-chapter completion + quiz grade, plus the Q12 calibration answer) — never goes in the target repo. Store it at `~/.claude/onboard/<repo-identifier>/<user-id>.json` on the local machine, where `<repo-identifier>` is derived from the repo's remote URL or absolute path, and `<user-id>` from `git config user.email` (fall back to OS username). This file is local-only by construction, so it can't accidentally get committed.
 
 ## 7. Staleness / diff-based update (re-running on an existing scope)
@@ -104,4 +106,4 @@ A future per-chapter depth-tier system (basics → edge cases/invariants/history
 
 ## 9. Committing
 
-Never run `git commit` or `git push` on your own initiative. After generating or updating the artifacts in step 6, show the user what changed and explicitly ask whether to commit. Only run `git add`/`git commit` after they say yes. Treat `git push` as a separate, even more explicit ask — never bundle it into the same confirmation.
+Never run `git commit` or `git push` on your own initiative — always ask first, regardless of `commitByDefault`. After generating or updating the artifacts in step 6, show the user what changed and ask whether to commit. `commitByDefault` (from `.onboard/config.json`) only changes which answer you present as the expected/default one (`true`: phrase it as "commit this? (default: yes)"; `false`: "commit this? (default: no, leave it staged/unstaged)") — it never skips the ask itself. Only run `git add`/`git commit` after they confirm. Treat `git push` as a separate, even more explicit ask — never bundle it into the same confirmation.
