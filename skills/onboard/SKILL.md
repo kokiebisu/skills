@@ -28,6 +28,8 @@ Chapters are organized around **domain concepts** (entities, use cases, invarian
 
 To build the skeleton, do a shallow pass — read READMEs/ADRs/docstrings, skim test `describe`/`it` names, skim top-level type/class names — to identify the domain concepts and a sensible teaching order (e.g. core entities before the workflows that use them). Don't deep-read implementation yet.
 
+Always produce a chapter skeleton and run the tour — never refuse to onboard a scope just because clean domain boundaries aren't apparent (e.g. a tightly-coupled legacy codebase). If the shallow pass can't find clear domain boundaries, build the best-effort grouping you can and say so once, up front, before the first chapter ("this codebase doesn't have clear domain boundaries, so the chapters below are a best-effort grouping"). Per-chapter confidence labels (step 3 below) still apply on top of this — don't suppress them just because the overall skeleton is already flagged as approximate.
+
 ## 3. Investigate each chapter just before teaching it
 
 For each chapter, immediately before presenting it (not all chapters up front):
