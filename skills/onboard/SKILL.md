@@ -18,7 +18,9 @@ If invoked with no argument:
 
 Before investigating, check whether `docs/onboarding/<scope-slug>.*.md` already exists for the resolved scope (where `<scope-slug>` is a kebab-case slug of the scope's domain name). If it exists, this is not a fresh tour — go to step 7 (staleness/diff update) instead of step 2. This also covers the case where another teammate already ran `/onboard` on this same scope.
 
-Once the scope is resolved (whether by menu or argument), and only for a fresh tour (not the diff-update path), ask **one** calibration question about the learner's familiarity with concepts likely to come up in this scope (e.g. "are you already comfortable with event-driven architectures / eventual consistency?"). Use the answer to set how much hand-holding (analogies/diagrams/scenarios per `reference/explanation-style.md`) this tour defaults to. This is a single one-time calibration — do not re-ask per chapter or continuously adjust based on quiz performance.
+Once the scope is resolved (whether by menu or argument), and only for a fresh tour (not the diff-update path), ask **one** calibration question about the learner's familiarity with concepts likely to come up in this scope (e.g. "are you already comfortable with event-driven architectures / eventual consistency?"). Use the answer to set how much hand-holding (analogies/diagrams/scenarios per `reference/explanation-style.md`) this tour defaults to. This is a single one-time calibration — do not re-ask per chapter or continuously adjust based on quiz performance, except for the one-shot escalation in `reference/explanation-style.md`.
+
+Persist the calibration answer in this user's personal progress file (see step 6). If they've already answered it before (from a prior scope), don't ask from scratch on a new scope — confirm instead ("you said you weren't very familiar with event-driven systems last time — still the case?").
 
 ## 2. Build the chapter skeleton
 
@@ -62,7 +64,7 @@ All repo-relative paths below are relative to the target codebase's root (not th
 - **`docs/onboarding/<scope-slug>.meta.json`** — structured per-chapter metadata: confidence label, last-investigated commit SHA, last-updated timestamp per chapter. This is what step 7's diff logic and any future doc-health aggregation reads.
 - **`docs/onboarding/glossary.<lang>.md`** — one shared glossary per language, per `reference/glossary-template.md`, covering **all** scopes (not per-scope) so a term learned in one scope is recognized and reused in another. Read and update it during step 4 of every chapter.
 - **`.onboard/config.json`** — repo-level, git-committed config, per `reference/config-schema.md`. Holds `docLanguages` (array). If it doesn't exist when you need it, create it defaulting to `[<language of this conversation>]`.
-- **Personal progress** (per-user, per-scope, per-chapter completion + quiz grade) — never goes in the target repo. Store it at `~/.claude/onboard/<repo-identifier>/<user-id>.json` on the local machine, where `<repo-identifier>` is derived from the repo's remote URL or absolute path, and `<user-id>` from `git config user.email` (fall back to OS username). This file is local-only by construction, so it can't accidentally get committed.
+- **Personal progress** (per-user, per-scope, per-chapter completion + quiz grade, plus the Q12 calibration answer) — never goes in the target repo. Store it at `~/.claude/onboard/<repo-identifier>/<user-id>.json` on the local machine, where `<repo-identifier>` is derived from the repo's remote URL or absolute path, and `<user-id>` from `git config user.email` (fall back to OS username). This file is local-only by construction, so it can't accidentally get committed.
 
 ## 7. Staleness / diff-based update (re-running on an existing scope)
 

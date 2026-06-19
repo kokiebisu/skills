@@ -8,7 +8,9 @@ Not every chapter needs the full treatment. A simple fact ("there are 3 order st
 
 ## One-time calibration, not continuous adaptation
 
-At the start of a fresh tour (see SKILL.md step 1), the learner answers one question about their familiarity with concepts likely to recur in this scope. Use that answer to set how much hand-holding this tour defaults to for the whole scope (e.g. an experienced hire who says they already know event-driven systems gets lighter treatment of those concepts than someone who says they don't). This is a single initial setting, not something re-evaluated per chapter or adjusted based on how a quiz answer goes — don't build adaptive/real-time logic here.
+At the start of a fresh tour (see SKILL.md step 1), the learner answers one question about their familiarity with concepts likely to recur in this scope. Use that answer to set how much hand-holding this tour defaults to for the whole scope (e.g. an experienced hire who says they already know event-driven systems gets lighter treatment of those concepts than someone who says they don't). This is a single initial setting, not something re-evaluated per chapter or adjusted based on how a single quiz answer goes — don't build continuous/per-chapter adaptive logic here.
+
+**One exception — a single escalation, not continuous tuning:** self-reported familiarity is unreliable (people overestimate what they know). If this user scores `misunderstood` on two chapters in a row within the same tour, increase the hand-holding level once, with a brief acknowledgment ("I'd set this to a lighter explanation style based on what you told me earlier — let me be more thorough from here"). This is a one-shot step up triggered by a clear threshold, not ongoing per-chapter re-tuning, and it only ever escalates (never silently dials back down to lighter again within the same tour).
 
 ## Don't pad — techniques compress, they don't add length
 
