@@ -36,6 +36,10 @@ For any chapter using the techniques above, structure the explanation in two lay
 
 Never skip the precision layer — the generated doc is a team asset (see `reference/doc-template.md`) that later readers need to be able to rely on for exact details, not just a friendly first impression.
 
+## Feedback tone on wrong/off-target quiz answers
+
+Correct a `misunderstood` or `uncertain` answer with an encouraging tone, not a neutral/clinical one — frame the gap as normal rather than a failure (e.g. "this one trips people up — here's what's actually going on" rather than "that's incorrect"). The goal is psychological safety: a learner who feels safe being wrong keeps answering quiz questions honestly and keeps using the skip/"I don't understand" escape hatches when they actually need them, instead of guessing or silently disengaging to avoid looking bad. This is independent of which explanation technique you used — it's about the feedback that follows, not the content itself.
+
 ## If the user says they still don't understand
 
 1. First, switch to a *different kind* of technique than the one you used (e.g. you led with an analogy — try a concrete scenario walkthrough next, not a rephrased version of the same analogy). Different people click with different techniques.
