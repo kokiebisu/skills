@@ -28,6 +28,8 @@ For a concept that needs more than a plain statement, pick whichever of these ac
 - **Diagram**: best for a concept that has *structure* — a state machine, a data flow, a sequence of calls. Use simple ASCII/box-and-arrow diagrams when talking in the conversation (these render correctly in any terminal). When the same diagram is written into the generated doc (`docs/onboarding/<scope-slug>.<lang>.md`), convert it to a Mermaid code block instead — GitHub renders Mermaid natively, so the committed doc looks right when teammates browse it there later. Don't use Mermaid in the live conversation; it won't render as a diagram there.
 - **Concrete scenario**: best for a concept that's procedural / timing-sensitive — walk through one specific, concrete instance end to end (e.g. "let's trace what happens to order #1234 from creation to fulfillment") rather than describing the general case abstractly.
 
+When explaining a specific method/function, don't show only its own body in isolation — find an actual call site elsewhere in the codebase and show that too, so the learner sees it in the context of real use, not just its internals. A method's implementation answers "how does it work"; a real call site answers "when/why does anyone call this", and both are needed for a full picture.
+
 ## Two-layer structure
 
 For any chapter using the techniques above, structure the explanation in two layers:
