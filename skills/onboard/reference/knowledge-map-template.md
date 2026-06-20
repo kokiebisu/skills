@@ -44,6 +44,10 @@ Like `completionCount` (see `SKILL.md` step 7), the per-chapter counts and `term
 
 Recompute both files whenever any chapter's quiz-grade counts change (i.e., right after step 4.6's grading) or when an orphaned scope is removed (`SKILL.md` step 1.3) — it's a cheap pure aggregation over existing `.meta.json` files and the glossary, not a fresh investigation.
 
+## Stability
+
+This JSON shape is **not yet a stable interface** — it's reusing this skill's existing `schemaVersion` mechanism (`SKILL.md` step 7) and may still change shape as the skill matures. A future dashboard tool should treat it the same way `/onboard` itself treats its own schema changes: expect to need updates when `schemaVersion` bumps, don't assume long-term field stability yet.
+
 ## Out of scope
 
 A local dashboard server (Grafana-style) that reads `knowledge-map.json` and renders it interactively is an explicitly separate future product, not part of this skill — `/onboard` is a Claude Code skill (an instruction file), not a long-running application, and shouldn't try to become one. This skill's only obligation toward that future tool is keeping the JSON clean and stable.
