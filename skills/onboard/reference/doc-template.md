@@ -19,6 +19,11 @@ Confidence: <High | Medium | Low>
 
 **Code references:** `/absolute/path/to/file.ts:123`, `/absolute/path/to/other.ts`
 
+```ts
+// the actual relevant snippet, quoted inline — not just the path.
+// readers without local file access (e.g. on a phone) still need to see this.
+```
+
 <Glossary terms used in this chapter link to `glossary.<lang>.md` rather than redefining them inline, e.g. `[idempotency](./glossary.en.md#idempotency)`.>
 
 <If a doc/code/test discrepancy was found, explain it here as its own paragraph, e.g.:>
@@ -35,6 +40,6 @@ Rules:
 - Never quote a secret, credential, token, or real personal/customer data value found during investigation — replace it with `<REDACTED: brief description>` (e.g. `<REDACTED: Stripe secret key>`). File paths and function names are fine to quote directly.
 - One `##` section per domain-concept chapter, in the order taught.
 - Confidence line is mandatory on every chapter, always visible (not hidden in a footnote).
-- Code references are concrete paths (and line numbers where it adds clarity), not vague pointers like "see the payments folder."
+- Code references are concrete paths (and line numbers where it adds clarity), not vague pointers like "see the payments folder." Always pair the path with the actual relevant snippet quoted inline — the path alone isn't enough for a reader without local file access (e.g. on a phone).
 - The "What changed since the last update" subsection only appears for chapters that were re-investigated on a later run — omit it on first generation.
 - Do not include any personal/per-user data in this file — it's a shared team asset, not a personal log.
