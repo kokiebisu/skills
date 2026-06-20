@@ -40,6 +40,6 @@ Rules:
 - Never quote a secret, credential, token, or real personal/customer data value found during investigation — replace it with `<REDACTED: brief description>` (e.g. `<REDACTED: Stripe secret key>`). File paths and function names are fine to quote directly.
 - One `##` section per domain-concept chapter, in the order taught.
 - Confidence line is mandatory on every chapter, always visible (not hidden in a footnote).
-- Code references are concrete paths (and line numbers where it adds clarity), not vague pointers like "see the payments folder." Always pair the path with the actual relevant snippet quoted inline — the path alone isn't enough for a reader without local file access (e.g. on a phone).
+- Code references are concrete paths (and line numbers where it adds clarity), not vague pointers like "see the payments folder." Always pair the path with the actual relevant snippet quoted inline — the path alone isn't enough for a reader without local file access (e.g. on a phone). Never write "see line N" / "lines X-Y" in prose as the way the reader is meant to locate a fragment — quote that exact fragment inline wherever it's discussed. Line numbers belong only in the `file:line` path itself, for click-to-open.
 - The "What changed since the last update" subsection only appears for chapters that were re-investigated on a later run — omit it on first generation.
 - Do not include any personal/per-user data in this file — it's a shared team asset, not a personal log.
