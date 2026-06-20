@@ -27,7 +27,7 @@ Two files, both repo-wide (like the glossary, not per-scope — see `reference/g
 
 - One node per chapter, across **all** scopes.
 - `understoodCount`/`uncertainCount`/`misunderstoodCount`: anonymous running totals, incremented every time any user is graded on that chapter's quiz (`SKILL.md` step 4) — no user identifier attached, same principle as `completionCount`.
-- `termUsage`: for every glossary term, the list of chapter node IDs that reference it (built incrementally whenever a chapter checks the glossary in step 4.2 — not just the term's "first introduced in" chapter). Two or more chapters sharing a term is what makes an edge.
+- `termUsage`: for every glossary term, the list of chapter node IDs that reference it (built incrementally whenever a chapter checks the glossary in step 4.2 — not just the term's "first introduced in" chapter). Two or more chapters sharing a term is what makes an edge. If a term has per-scope conflicting definitions (see `reference/glossary-template.md`'s "In <scope-slug>" sub-sections), don't link chapters across scopes that use *different* definitions of the same term name — only link chapters that genuinely share the same meaning. Track `termUsage` per definition (e.g. keyed by `<term>` for the default and `<term>@<scope-slug>` for a scope-specific override) so this distinction survives into the graph.
 
 ## Generating the Mermaid view
 
